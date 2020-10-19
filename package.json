@@ -9,9 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.5"
-  },
+ 
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -20,5 +18,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9",
     "validator": "^13.1.17"
+     "nodemon": "^2.0.4",
+
   }
 }
