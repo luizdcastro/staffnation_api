@@ -28,5 +28,7 @@ mongoose
 //Route Middlewares
 app.use("/v1/auth", authRouter);
 
-const port = 3000;
-app.listen(port, () => console.log(`Running on port ${port}`));
+const port = 8000;
+app.listen(process.env.PORT || port, () =>
+	console.log(`Running on port ${port}`)
+);
