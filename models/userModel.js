@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
+	cpf: {
+		type: String,
+		required: [true, "Por favor, informe seu CPF"],
+	},
 	name: {
 		type: String,
 		required: [true, "Por favor, informe seu nome"],
@@ -10,7 +13,6 @@ const userSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: [true, "Por favor, informe seu email"],
-		validate: [validator.isEmail],
 		unique: true,
 	},
 	phone: {

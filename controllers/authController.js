@@ -12,6 +12,7 @@ exports.register = async (req, res) => {
 	let user;
 	try {
 		user = await User.create({
+			cpf: req.body.cpf,
 			name: req.body.name,
 			email: req.body.email,
 			phone: req.body.phone,
@@ -31,15 +32,15 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res, next) => {
-	const { email, password } = req.body;
-	if (!email || !password) {
-		return res.status(400).send({ error: "Informe seu email e senha" });
+	const { cpf, password } = req.body;
+	if (!cpf || !password) {
+		return res.status(400).send({ error: "Informe seu cpf e senha" });
 	}
 
-	const user = await User.findOne({ email }).select("+password");
+	const user = await User.findOne({ cpf }).select("+password");
 
 	if (!user || !(await bcrypt.compare(password, user.password))) {
-		return res.status(401).send({ error: "Seu email ou senha estão incorretos" });
+		return res.status(401).send({ error: "Seu cpf ou senha estão incorretos" });
 	}
 
 	user.password = undefined;
