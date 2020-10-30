@@ -14,11 +14,14 @@ exports.register = async (req, res) => {
 		user = await User.create({
 			cpf: req.body.cpf,
 			name: req.body.name,
+			birthdayDate: req.body.birthdayDate,
+			address: req.body.address,
 			email: req.body.email,
 			phone: req.body.phone,
+			categories: req.body.categories,
 			password: req.body.password,
+			confirmPassword: req.body.confirmPassword,
 		});
-
 		user.password = undefined;
 	} catch (error) {
 		res.status(400).json({ status: "fail", error: error });
