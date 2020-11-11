@@ -9,23 +9,34 @@ function generateToken(params = {}) {
 }
 
 exports.register = async (req, res) => {
-	let user;
-	try {
-		user = await User.create({
-			cpf: req.body.cpf,
-			name: req.body.name,
-			birthdayDate: req.body.birthdayDate,
-			address: req.body.address,
-			email: req.body.email,
-			phone: req.body.phone,
-			categories: req.body.categories,
-			password: req.body.password,
-			confirmPassword: req.body.confirmPassword,
-		});
-		user.password = undefined;
-	} catch (error) {
-		res.status(400).json({ status: "fail", error: error });
+	const { cpf, name, birthdayDate, address, email, phone, categories, password, confirmPassword } = req.body
+
+	if (password !== confirmPassword) {
+		return res.status(400).send({ error: "Confirmação de senha inválida" });
 	}
+
+	if (password.length < 6) {
+		return res.status(400).send({ error: "Senha deve conter no mínimo de 6 digitos" });
+	}
+
+	const userCpf = await User.findOne({ cpf: req.body.cpf });
+	if (userCpf) {
+		return res.status(400).send({ error: `CPF ${cpf} já cadastrado` });
+	}
+
+	let user;
+	user = await User.create({
+		cpf: req.body.cpf,
+		name: req.body.name,
+		birthdayDate: req.body.birthdayDate,
+		address: req.body.address,
+		email: req.body.email,
+		phone: req.body.phone,
+		categories: req.body.categories,
+		password: req.body.password,
+		confirmPassword: req.body.confirmPassword,
+	});
+	user.password = undefined;
 
 	res.status(201).json({
 		status: "success",
