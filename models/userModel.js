@@ -49,7 +49,8 @@ const userSchema = new mongoose.Schema(
 			type: String,
 		},
 		rating: {
-			type: String,
+			type: Number,
+			default: 0.00
 		},
 		createdAt: {
 			type: Date,

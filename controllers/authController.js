@@ -77,7 +77,7 @@ exports.protect = async (req, res, next) => {
 
 	if (!token) return res.status(401).send({ error: "Token não informado" });
 
-	jwt.verify(token, "Staffination2020Project", (err, decoded) => {
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) return res.status(401).send({ error: "Token inválido" });
 		req.userId = decoded.id;
 	});

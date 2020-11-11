@@ -18,7 +18,7 @@ const userRouter = require('./routes/userRoutes')
 dotenv.config({ path: "./config.env" });
 
 mongoose
-	.connect("mongodb+srv://luizdcastro:lM8CJyBPhn6t8NnA@cluster0.zltnc.mongodb.net/staffnation?retryWrites=true&w=majority", {
+	.connect(process.env.DB_CONNECT, {
 		useNewUrlParser: true,
 		useCreateIndex: true,
 		useUnifiedTopology: true,
