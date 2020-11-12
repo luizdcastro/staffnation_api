@@ -13,6 +13,7 @@ app.use(cors());
 //Import Routes
 const authRouter = require("./routes/authRoutes");
 const userRouter = require('./routes/userRoutes')
+const fileRouter = require('./routes/fileRoutes')
 
 //Connect to DB
 dotenv.config({ path: "./config.env" });
@@ -29,6 +30,7 @@ mongoose
 //Route Middlewares
 app.use("/v1/auth", authRouter);
 app.use("/v1/user", userRouter);
+app.use("/v1/file", fileRouter)
 
 const port = 8000;
 app.listen(process.env.PORT || port, () =>
