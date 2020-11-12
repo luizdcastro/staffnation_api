@@ -47,10 +47,23 @@ const userSchema = new mongoose.Schema(
 		},
 		avatar: {
 			type: String,
+			default: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
 		},
 		rating: {
 			type: Number,
-			default: 0.00
+			default: 0
+		},
+		bankData: {
+			type: Object,
+			default: {
+				bankName: '',
+				agency: '',
+				account: ''
+			}
+		},
+		totalCash: {
+			type: Number,
+			default: 0
 		},
 		createdAt: {
 			type: Date,
