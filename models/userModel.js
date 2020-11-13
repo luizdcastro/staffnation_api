@@ -46,8 +46,11 @@ const userSchema = new mongoose.Schema(
 			minlength: 6,
 		},
 		avatar: {
-			type: String,
-			default: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
+			type: Object,
+			default: {
+				id: '',
+				url: 'https://staffnation-images.s3.amazonaws.com/e1aa9211ba057dcd05f8ae6d8a15698c-default.png'
+			}
 		},
 		rating: {
 			type: Number,
