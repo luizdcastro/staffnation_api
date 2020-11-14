@@ -22,5 +22,11 @@ const businessSchema = new mongoose.Schema(
     }
 );
 
+businessSchema.virtual('job', {
+    ref: 'Jobs',
+    foreignField: 'business',
+    localField: '_id',
+});
+
 module.exports = mongoose.model("Business", businessSchema);
 

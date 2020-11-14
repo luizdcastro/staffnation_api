@@ -4,7 +4,7 @@ const Business = require('./businessModal');
 
 const jobSchema = new mongoose.Schema(
     {
-        partner: {
+        business: {
             type: mongoose.Schema.ObjectId,
             ref: 'Business',
         },
@@ -43,6 +43,8 @@ const jobSchema = new mongoose.Schema(
         toObject: { virtuals: true },
     }
 );
+
+
 
 module.exports = mongoose.model("Jobs", jobSchema);
 
