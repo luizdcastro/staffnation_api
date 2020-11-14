@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const bussinessSchema = new mongoose.Schema(
+const businessSchema = new mongoose.Schema(
     {
         title: {
             type: String,
@@ -22,5 +22,5 @@ const bussinessSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model("Business", bussinessSchema);
+module.exports = mongoose.model("Business", businessSchema);
 
