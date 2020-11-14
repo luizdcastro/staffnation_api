@@ -1,7 +1,15 @@
 const mongoose = require("mongoose");
+const Business = require('./businessModal');
+
 
 const jobSchema = new mongoose.Schema(
     {
+        partner: [
+            {
+                type: mongoose.Schema.ObjectId,
+                ref: 'Business',
+            },
+        ],
         title: {
             type: String,
         },

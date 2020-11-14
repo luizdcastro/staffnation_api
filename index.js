@@ -14,6 +14,7 @@ app.use(cors());
 const authRouter = require("./routes/authRoutes");
 const userRouter = require('./routes/userRoutes')
 const fileRouter = require('./routes/fileRoutes')
+const businessRouter = require('./routes/businessRoutes')
 const jobRouter = require('./routes/jobRoutes')
 
 //Connect to DB
@@ -32,8 +33,8 @@ mongoose
 app.use("/v1/auth", authRouter);
 app.use("/v1/user", userRouter);
 app.use("/v1/file", fileRouter);
+app.use("/v1/business", businessRouter);
 app.use("/v1/job", jobRouter);
-
 
 const port = 8000;
 app.listen(process.env.PORT || port, () =>
