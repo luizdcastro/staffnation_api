@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
 			required: [true, "Por favor, informe seu telefone"],
 		},
 		categories: {
-			type: Object,
+			type: Array,
 			required: [true, "Por favor, informe suas categorias"],
 		},
 		password: {
