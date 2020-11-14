@@ -8,6 +8,9 @@ const jobSchema = new mongoose.Schema(
         category: {
             type: String,
         },
+        positions: {
+            type: Number
+        },
         date: {
             type: String,
         },
