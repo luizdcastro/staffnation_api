@@ -13,4 +13,12 @@ router
     .patch(JobController.updateJob)
     .delete(JobController.deleteJob)
 
+router
+    .route('/createPending/:id')
+    .patch(JobController.createPendingApplication)
+
+router
+    .route('/removePending/:id')
+    .patch(JobController.removePendingApplication)
+
 module.exports = router;

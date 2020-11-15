@@ -8,6 +8,12 @@ const jobSchema = new mongoose.Schema(
             type: mongoose.Schema.ObjectId,
             ref: 'Business',
         },
+        pendingApplications: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Users',
+            }
+        ],
         title: {
             type: String,
         },

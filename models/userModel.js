@@ -79,6 +79,12 @@ const userSchema = new mongoose.Schema(
 	}
 );
 
+userSchema.virtual('pendingApplications', {
+	ref: 'Jobs',
+	foreignField: 'pendingApplications',
+	localField: '_id'
+})
+
 userSchema.pre(/^find/, function (next) {
 	this.find({ active: { $ne: false } });
 	next();

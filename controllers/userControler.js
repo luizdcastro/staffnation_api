@@ -12,7 +12,7 @@ exports.getMe = (req, res, next) => {
 };
 
 exports.getUser = catchAsync(async (req, res, next) => {
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id).populate('pendingApplications')
 
     res.status(200).json({
         status: 'success',
