@@ -8,12 +8,20 @@ const jobSchema = new mongoose.Schema(
             type: mongoose.Schema.ObjectId,
             ref: 'Business',
         },
-        pendingApplications: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Users',
-            }
-        ],
+        applicationsPending:
+            [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Users',
+                }
+            ],
+        applicationsAccepted:
+            [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Users',
+                }
+            ],
         title: {
             type: String,
         },

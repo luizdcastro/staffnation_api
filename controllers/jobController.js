@@ -9,9 +9,9 @@ exports.getAllJobs = factoty.getAll(Job)
 exports.updateJob = factoty.updateOne(Job);
 exports.deleteJob = factoty.deleteOne(Job);
 
-exports.createPendingApplication = catchAsync(async (req, res, next) => {
+exports.createAppPending = catchAsync(async (req, res, next) => {
     const job = await Job.findByIdAndUpdate(req.params.id, {
-        $addToSet: { pendingApplications: req.body.pendingApplications },
+        $addToSet: { applicationsPending: req.body.applicationsPending },
         new: true,
     });
 
@@ -21,9 +21,33 @@ exports.createPendingApplication = catchAsync(async (req, res, next) => {
     });
 });
 
-exports.removePendingApplication = catchAsync(async (req, res, next) => {
+exports.removeAppPending = catchAsync(async (req, res, next) => {
     const job = await Job.findByIdAndUpdate(req.params.id, {
-        $pull: { pendingApplications: { $in: req.body.pendingApplications } },
+        $pull: { applicationsPending: { $in: req.body.applicationsPending } },
+        new: true,
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: job
+    });
+});
+
+exports.createAppAccepted = catchAsync(async (req, res, next) => {
+    const job = await Job.findByIdAndUpdate(req.params.id, {
+        $addToSet: { applicationsAccepted: req.body.applicationsAccepted },
+        new: true,
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: job
+    });
+});
+
+exports.removeAppAccepted = catchAsync(async (req, res, next) => {
+    const job = await Job.findByIdAndUpdate(req.params.id, {
+        $pull: { applicationsAccepted: { $in: req.body.applicationsAccepted } },
         new: true,
     });
 

@@ -15,10 +15,18 @@ router
 
 router
     .route('/createPending/:id')
-    .patch(JobController.createPendingApplication)
+    .patch(JobController.createAppPending)
 
 router
     .route('/removePending/:id')
-    .patch(JobController.removePendingApplication)
+    .patch(JobController.removeAppPending)
+
+router
+    .route('/createAccepted/:id')
+    .patch(JobController.createAppAccepted)
+
+router
+    .route('/removeAccepted/:id')
+    .patch(JobController.removeAppAccepted)
 
 module.exports = router;

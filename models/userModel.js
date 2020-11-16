@@ -79,9 +79,15 @@ const userSchema = new mongoose.Schema(
 	}
 );
 
-userSchema.virtual('pendingApplications', {
+userSchema.virtual('jobsPending', {
 	ref: 'Jobs',
-	foreignField: 'pendingApplications',
+	foreignField: 'applicationsPending',
+	localField: '_id'
+})
+
+userSchema.virtual('jobsAccepted', {
+	ref: 'Jobs',
+	foreignField: 'applicationsAccepted',
 	localField: '_id'
 })
 
