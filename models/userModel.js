@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: [true, "Por favor, informe seu nome"],
 		},
+		gender: {
+			type: String,
+			required: [true, "Por favor, informe seu nome"],
+		},
 		birthdayDate: {
 			type: String,
 			required: [true, "Por favor, informe sua data e nascimento"],
@@ -59,7 +63,7 @@ const userSchema = new mongoose.Schema(
 		bankData: {
 			type: Object,
 			default: {
-				bankName: '',
+				name: '',
 				agency: '',
 				account: ''
 			}
