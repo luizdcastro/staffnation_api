@@ -28,6 +28,7 @@ exports.register = async (req, res) => {
 	user = await User.create({
 		cpf: req.body.cpf,
 		name: req.body.name,
+		gender: req.body.gender,
 		birthdayDate: req.body.birthdayDate,
 		address: req.body.address,
 		email: req.body.email,
