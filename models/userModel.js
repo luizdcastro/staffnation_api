@@ -95,6 +95,12 @@ userSchema.virtual('jobsAccepted', {
 	localField: '_id'
 })
 
+userSchema.virtual('jobsFinished', {
+	ref: 'Jobs',
+	foreignField: 'applicationsFinished',
+	localField: '_id'
+})
+
 userSchema.pre(/^find/, function (next) {
 	this.find({ active: { $ne: false } });
 	next();

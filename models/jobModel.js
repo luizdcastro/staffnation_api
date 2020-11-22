@@ -22,6 +22,13 @@ const jobSchema = new mongoose.Schema(
                     ref: 'Users',
                 }
             ],
+        applicationsFinished:
+            [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Users',
+                }
+            ],
         title: {
             type: String,
         },
@@ -57,8 +64,6 @@ const jobSchema = new mongoose.Schema(
         toObject: { virtuals: true },
     }
 );
-
-
 
 module.exports = mongoose.model("Jobs", jobSchema);
 

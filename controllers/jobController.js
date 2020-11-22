@@ -56,3 +56,28 @@ exports.removeAppAccepted = catchAsync(async (req, res, next) => {
         data: job
     });
 });
+
+
+exports.createAppFinished = catchAsync(async (req, res, next) => {
+    const job = await Job.findByIdAndUpdate(req.params.id, {
+        $addToSet: { applicationsFinished: req.body.applicationsFinished },
+        new: true,
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: job
+    });
+});
+
+exports.removeAppFinished = catchAsync(async (req, res, next) => {
+    const job = await Job.findByIdAndUpdate(req.params.id, {
+        $pull: { applicationsFinished: { $in: req.body.applicationsFinished } },
+        new: true,
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: job
+    });
+});

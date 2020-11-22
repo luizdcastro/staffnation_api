@@ -29,4 +29,12 @@ router
     .route('/removeAccepted/:id')
     .patch(JobController.removeAppAccepted)
 
+router
+    .route('/createFinished/:id')
+    .patch(JobController.createAppFinished)
+
+router
+    .route('/removeFinished/:id')
+    .patch(JobController.removeAppFinished)
+
 module.exports = router;
