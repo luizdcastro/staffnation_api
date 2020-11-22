@@ -7,7 +7,7 @@ exports.updateUser = factoty.updateOne(User);
 exports.deleteUser = factoty.deleteOne(User);
 
 exports.getMe = (req, res, next) => {
-    req.params.id = req.user.id;
+    req.params.id = req.userId;
     next();
 };
 

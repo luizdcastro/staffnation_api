@@ -4,8 +4,9 @@ const userController = require("../controllers/userControler");
 const authController = require("../controllers/authController");
 
 router.get(
-    '/:id',
+    '/me',
     authController.protect,
+    userController.getMe,
     userController.getUser
 );
 
