@@ -1,12 +1,38 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const sendEmail = require('./../utils/email');
 
 function generateToken(params = {}) {
 	return jwt.sign(params, process.env.JWT_SECRET, {
 		expiresIn: process.env.JWT_EXPIRES_IN,
 	});
 }
+
+
+const createSendToken = (user, statusCode, res) => {
+	const token = signToken(user._id);
+
+	const cookieOptions = {
+		expires: new Date(
+			Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+		),
+		secure: true,
+		httpOnly: true,
+	};
+
+	if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+	res.cookie('jwt', token, cookieOptions);
+	user.password = undefined;
+
+	res.status(statusCode).json({
+		status: 'success',
+		token,
+		data: {
+			user: user,
+		},
+	});
+};
 
 exports.register = async (req, res) => {
 	const { cpf, name, birthdayDate, address, email, phone, categories, password, confirmPassword } = req.body
@@ -84,4 +110,41 @@ exports.protect = async (req, res, next) => {
 	});
 
 	next();
+};
+
+exports.forgotPassword = async (req, res, next) => {
+	const user = await User.findOne({ cpf: req.body.cpf });
+
+	if (!user) {
+		return res.status(401).send({ error: "Nenhum email localizado para seu CPF" });
+	}
+
+	const resetToken = user.createPasswordResetToken();
+	await user.save({ validateBeforeSave: false });
+
+	const resetURL = `https://staffnation.com.br/${resetToken}`;
+
+	const message = `Olá, ${user.name}. Clique no link abaixo para alterar sua senha. ${resetURL}.\nCaso você não tenha pedido essa alteração, entre em contato com a gente.`;
+
+	try {
+		await sendEmail({
+			email: user.email,
+			subject: 'Link para alteração de senha do Staffnation',
+			message,
+		});
+
+		res.status(200).json({
+			status: 'success',
+			message,
+		});
+	} catch (error) {
+		console.log(error)
+		user.passwordResetToken = undefined;
+		user.passwordResetExpires = undefined;
+		await user.save({ validateBeforeSave: false });
+
+		return next(
+			res.status(400).send({ error: "Ocorreu um erro durante o envio do e-mail! Tente novamente." })
+		);
+	}
 };
