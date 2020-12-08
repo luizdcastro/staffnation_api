@@ -54,6 +54,10 @@ const jobSchema = new mongoose.Schema(
             type: Object,
 
         },
+        image: {
+            type: String,
+
+        },
         createdAt: {
             type: Date,
             default: Date.now,
