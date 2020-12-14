@@ -11,11 +11,13 @@ app.use(helmet());
 app.use(cors());
 
 //Import Routes
-const authRouter = require("./routes/authRoutes");
+const authUserRouter = require("./routes/authUserRoutes");
+const authBusinessRouter = require("./routes/authBusinessRoutes");
 const userRouter = require('./routes/userRoutes')
 const fileRouter = require('./routes/fileRoutes')
 const businessRouter = require('./routes/businessRoutes')
 const jobRouter = require('./routes/jobRoutes')
+const storeRouter = require('./routes/storeRoutes')
 
 //Connect to DB
 dotenv.config({ path: "./config.env" });
@@ -30,10 +32,12 @@ mongoose
 	.then(() => console.log("DB connection successful!"));
 
 //Route Middlewares
-app.use("/v1/auth", authRouter);
+app.use("/v1/authUser", authUserRouter);
+app.use("/v1/authBusiness", authBusinessRouter)
 app.use("/v1/user", userRouter);
 app.use("/v1/file", fileRouter);
 app.use("/v1/business", businessRouter);
+app.use("/v1/store", storeRouter);
 app.use("/v1/job", jobRouter);
 
 const port = 8000;

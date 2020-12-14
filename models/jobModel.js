@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
-const Business = require('./businessModal');
-
+const Store = require('./storeModel');
 
 const jobSchema = new mongoose.Schema(
     {
-        business: {
+        businessAccount: {
             type: mongoose.Schema.ObjectId,
             ref: 'Business',
+        },
+        store: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Stores',
         },
         applicationsPending:
             [
@@ -29,9 +32,6 @@ const jobSchema = new mongoose.Schema(
                     ref: 'Users',
                 }
             ],
-        title: {
-            type: String,
-        },
         category: {
             type: String,
         },
@@ -47,16 +47,8 @@ const jobSchema = new mongoose.Schema(
         payment: {
             type: Number,
         },
-        uniform: {
+        description: {
             type: String,
-        },
-        address: {
-            type: Object,
-
-        },
-        image: {
-            type: String,
-
         },
         createdAt: {
             type: Date,
@@ -68,6 +60,14 @@ const jobSchema = new mongoose.Schema(
         toObject: { virtuals: true },
     }
 );
+
+jobSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'store',
+        select: 'name phone image address'
+    })
+    next()
+})
 
 module.exports = mongoose.model("Jobs", jobSchema);
 
