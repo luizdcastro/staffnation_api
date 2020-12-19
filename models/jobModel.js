@@ -69,5 +69,22 @@ jobSchema.pre(/^find/, function (next) {
     next()
 })
 
+jobSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'applicationsPending',
+        select: 'name phone categories gender rating address avatar'
+    })
+    next()
+})
+
+
+jobSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'applicationsAccepted',
+        select: 'name phone categories gender rating address avatar'
+    })
+    next()
+})
+
 module.exports = mongoose.model("Jobs", jobSchema);
 

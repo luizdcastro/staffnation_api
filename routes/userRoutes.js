@@ -10,6 +10,10 @@ router.get(
     userController.getUser
 );
 
+router
+    .route('/')
+    .get(userController.getAllusers)
+
 router.patch('/update/:id', authUserController.protect, userController.updateMe);
 
 module.exports = router;

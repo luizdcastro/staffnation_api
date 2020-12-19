@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema(
 			type: Array,
 			required: [true, "Por favor, informe suas categorias"],
 		},
+		pushId: {
+			type: String,
+			default: 'ExponentPushToken'
+		},
 		password: {
 			type: String,
 			required: [true, "Por favor, informe sua senha"],

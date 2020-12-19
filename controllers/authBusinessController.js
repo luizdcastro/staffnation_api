@@ -101,7 +101,7 @@ exports.protect = async (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(401).send({ error: "Token inválido" });
-        req.business = decoded.id;
+        req.businessId = decoded.id;
     });
 
     next();

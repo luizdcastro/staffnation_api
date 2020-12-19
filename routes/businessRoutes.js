@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const authController = require("../controllers/authBusinessController");
+const authBusinessController = require("../controllers/authBusinessController");
 const BusinessController = require('../controllers/businessController')
 
 router.get(
     '/me',
-    authController.protect,
+    authBusinessController.protect,
     BusinessController.getMeBusiness,
     BusinessController.getBusiness
 );
-
-router.patch('/update/:id', authController.protect, BusinessController.updateMeBusiness);
 
 router
     .route('/')
     .post(BusinessController.createBusiness)
     .get(BusinessController.getAllBusiness)
+
+router.patch('/update/:id', authBusinessController.protect, BusinessController.updateMeBusiness);
 
 module.exports = router; 

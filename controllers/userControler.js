@@ -33,4 +33,3 @@ exports.updateMe = catchAsync(async (req, res, next) => {
         data: user,
     });
 });
-
