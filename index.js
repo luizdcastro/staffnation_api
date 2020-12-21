@@ -42,7 +42,7 @@ app.use("/v1/store", storeRouter);
 app.use("/v1/job", jobRouter);
 
 
-const port = 8000;
+const port = 5000;
 app.listen(process.env.PORT || port, () =>
 	console.log(`Running on port ${port}`)
 );

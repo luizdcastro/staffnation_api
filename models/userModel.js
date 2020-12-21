@@ -68,9 +68,12 @@ const userSchema = new mongoose.Schema(
 		bankData: {
 			type: Object,
 			default: {
-				name: '',
-				agency: '',
-				account: ''
+				bankNumber: '',
+				agencyNumber: '',
+				accountNumber: '',
+				accountComplementNumber: '',
+				accountType: '',
+				accountHolder: ''
 			}
 		},
 		totalCash: {
