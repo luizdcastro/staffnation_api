@@ -66,13 +66,16 @@ exports.createToken = async (req, res, next) => {
             creditCardHash: hash
         }
 
+        const bearer = process.env.JUNO_BEARER_TOKEN
+        const resourseToken = process.env.JUNO_RESOURCE_TOKEN,
+
         const token = await fetch(process.env.JUNO_API, {
             method: 'POST',
             headers: {
                 'X-Api-Version': '2',
-                'X-Resource-Token': process.env.JUNO_RESOURCE_TOKEN,
+                'X-Resource-Token': resourseToken,
                 'Content-Type': 'application/json',
-                'Authorization': process.env.JUNO_BEARER_TOKEN,
+                'Authorization': bearer
             },
             body: JSON.stringify(data),
         })
