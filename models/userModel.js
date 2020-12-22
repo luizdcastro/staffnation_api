@@ -42,6 +42,9 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			default: 'ExponentPushToken'
 		},
+		creditCard: {
+			type: Object,
+		},
 		password: {
 			type: String,
 			required: [true, "Por favor, informe sua senha"],

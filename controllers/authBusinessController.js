@@ -9,7 +9,6 @@ function generateToken(params = {}) {
     });
 }
 
-
 const createSendToken = (business, statusCode, res) => {
     const token = signToken(business._id);
 

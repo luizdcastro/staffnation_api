@@ -10,6 +10,11 @@ router.get(
     userController.getUser
 );
 
+router.post(
+    '/payment',
+    userController.createToken
+);
+
 router
     .route('/')
     .get(userController.getAllusers)
