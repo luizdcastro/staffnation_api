@@ -44,7 +44,7 @@ exports.createToken = async (req, res, next) => {
         return res.status(400).send({ error: "Ocorreu um erro, tente novamente." });
     }
 
-    const { holderName, cardNumber, securityCode, expirationMonth, expirationYear } = req.body
+    const { holderName, cardNumber, securityCode, expirationMonth, expirationYear, cardBrand } = req.body
 
     const publicToken = process.env.JUNO_PUBLIC_TOKEN;
     const environment = 'sandbox';
@@ -83,7 +83,8 @@ exports.createToken = async (req, res, next) => {
                         creditCardId: data.creditCardId,
                         last4CardNumber: data.last4CardNumber,
                         expirationMonth: data.expirationMonth,
-                        expirationYear: data.expirationYear
+                        expirationYear: data.expirationYear,
+                        cardBrand: cardBrand
                     }
                 }
                 User.findByIdAndUpdate(user._id, creditCard, {
