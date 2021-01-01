@@ -28,8 +28,16 @@ const jobSchema = new mongoose.Schema(
         applicationsFinished:
             [
                 {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Users',
+                    userId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'Users',
+                    },
+                    isRated: {
+                        type: Boolean
+                    },
+                    score: {
+                        type: Number
+                    }
                 }
             ],
         category: {
