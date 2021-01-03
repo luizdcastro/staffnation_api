@@ -19,6 +19,10 @@ router
     .route('/')
     .get(userController.getAllusers)
 
+router
+    .route('/:id')
+    .get(userController.getUser)
+
 router.patch('/update/:id', authUserController.protect, userController.updateMe);
 
 module.exports = router;

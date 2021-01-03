@@ -31,3 +31,28 @@ exports.updateMeBusiness = catchAsync(async (req, res, next) => {
         data: business,
     });
 });
+
+
+exports.addFavorite = catchAsync(async (req, res, next) => {
+    const business = await Business.findByIdAndUpdate(req.params.id, {
+        $addToSet: { favorites: req.body.favorite },
+        new: true,
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: business
+    });
+});
+
+exports.deleteFavorite = catchAsync(async (req, res, next) => {
+    const business = await Business.findByIdAndUpdate(req.params.id, {
+        $pull: { favorites: { $in: req.body.favorite } },
+        new: true,
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: business
+    });
+});

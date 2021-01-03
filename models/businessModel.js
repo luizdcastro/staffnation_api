@@ -17,6 +17,13 @@ const businessSchema = new mongoose.Schema(
             type: String,
             required: [true, "Por favor, informe seu telefone"],
         },
+        favorites:
+            [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Users',
+                }
+            ],
         password: {
             type: String,
             required: [true, "Por favor, informe sua senha"],
@@ -39,6 +46,14 @@ const businessSchema = new mongoose.Schema(
         toObject: { virtuals: true },
     }
 );
+
+businessSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'favorites',
+        select: 'name avatar phone address rating'
+    })
+    next()
+})
 
 businessSchema.pre(/^find/, function (next) {
     this.find({ active: { $ne: false } });

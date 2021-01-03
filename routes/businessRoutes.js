@@ -17,4 +17,13 @@ router
 
 router.patch('/update/:id', authBusinessController.protect, BusinessController.updateMeBusiness);
 
+
+router
+    .route('/addFavorite/:id')
+    .patch(BusinessController.addFavorite)
+
+router
+    .route('/deleteFavorite/:id')
+    .patch(BusinessController.deleteFavorite)
+
 module.exports = router; 
